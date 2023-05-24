@@ -1,16 +1,20 @@
 <h2><%= @restaurant.name %></h2>
-<p><%= @restaurant.address %></p>
-<p><%= @restaurant.category %></p>
-<p><strong>Reviews</strong></p>
+  <p><%= @restaurant.address %></p>
+  <p><%= @restaurant.category %></p>
+  <p><strong>Reviews</strong></p>
 <ul class="list-group">
   <% @restaurant.reviews.each do |review| %>
     <li class="list-group-item">
-    <p><%= review.content %></p>
-    <p><%= review.rating %>/5</p>
-
-
-    </li>
+      <p><%= review.content %></p>
+      <p><%= review.rating %>/5</p>
   <% end %>
-  <%= link_to "Create a review", new_restaurant_review_path(@restaurant)%>
+    </li>
+    <h1>New review</h1>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating %>
+    <%= f.submit "Submit review", class: "btn btn-primary" %>
+  <% end %>
+
 </ul>
 <br>
